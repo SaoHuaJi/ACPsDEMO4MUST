@@ -1,0 +1,84 @@
+{
+  "aic": "demo.partner.weather-news-agent",
+  "active": true,
+  "lastModifiedTime": "2026-07-10T10:00:00+08:00",
+  "protocolVersion": "02.01",
+  "name": "Weather and News Partner Agent",
+  "description": "一个能够查询指定地点当前天气，并通过内部 Coze 今日热点查询智能体查询新闻热点的 Partner 智能体。",
+  "version": "1.0.0",
+  "provider": {
+    "countryCode": "CN",
+    "organization": "BUPT",
+    "department": "School of Artificial Intelligence",
+    "name": "ANT Lab",
+    "email": "demo@example.com"
+  },
+  "securitySchemes": {},
+  "endPoints": [
+    {
+      "url": "http://127.0.0.1:8011/rpc",
+      "transport": "JSONRPC"
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "notification": false,
+    "messageQueue": []
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "weather.current.lookup",
+      "name": "当前天气查询",
+      "description": "根据城市、地标、邮编或经纬度查询指定地点的当前天气，返回温度、体感温度、湿度、风速和天气描述。",
+      "version": "1.0.0",
+      "tags": [
+        "天气",
+        "实时查询",
+        "地理位置"
+      ],
+      "examples": [
+        "查询北京现在的天气",
+        "上海当前温度是多少",
+        "查一下 39.9042,116.4074 附近天气"
+      ],
+      "inputModes": [
+        "text/plain"
+      ],
+      "outputModes": [
+        "text/plain"
+      ]
+    },
+    {
+      "id": "coze.news.hotspots.lookup",
+      "name": "今日热点新闻查询",
+      "description": "查询今日热点、新闻或时事查询，并返回文本结果。",
+      "version": "1.0.0",
+      "tags": [
+        "Coze",
+        "今日热点",
+        "新闻查询"
+      ],
+      "examples": [
+        "查询今天的科技新闻热点",
+        "帮我查一下今日国内热点新闻",
+        "让 Coze 今日热点智能体总结今天的重要新闻"
+      ],
+      "inputModes": [
+        "text/plain"
+      ],
+      "outputModes": [
+        "text/plain"
+      ]
+    }
+  ],
+  "entityMeta": {
+    "environment": "demo",
+    "service": "weather-news-partner"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "token": "replace-with-your-token",
+  "bot_id": "replace-with-your-bot-id",
+  "base_url": "https://api.coze.cn",
+  "user_id": "acps-partner"
+}

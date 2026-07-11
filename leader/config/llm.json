@@ -1,0 +1,6 @@
+{
+  "provider": "openai",
+  "model": "replace-with-your-model",
+  "api_key": "replace-with-your-api-key",
+  "base_url": "replace-with-your-base-url"
+}

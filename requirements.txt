@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+httpx
+langchain
+langchain-openai
+cozepy>=0.20.0
