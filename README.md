@@ -1,4 +1,4 @@
-# ACPs + LangChain Leader / Partner 演示工程（中文详细注释版）
+# ACPs + LangChain Leader / Partner 演示工程
 
 本文件包演示如何用 LangChain 创建能够调用工具的 Partner 智能体，以及能够自主判断是否调用 Partner 协作的 Leader 智能体。Agent 间通信直接使用 ACPs SDK 的 Direct RPC 能力：
 
