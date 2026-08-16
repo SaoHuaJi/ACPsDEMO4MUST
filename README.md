@@ -196,6 +196,7 @@ Leader 的 LLM 配置写在 Leader 机器的 `leader/config/llm.json`，不需�
 ## 启动 Partner
 
 ```bash
+# 该 sh 脚本使用 .venv 虚拟环境下的 python，需要改成自己部署的虚拟环境
 ./partner/start.sh
 ```
 或
@@ -214,6 +215,7 @@ curl http://127.0.0.1:8011/acs
 如果 Leader 和 Partner 在同一台机器：
 
 ```bash
+# 该 sh 脚本使用 .venv 虚拟环境下的 python，需要改成自己部署的虚拟环境
 ./leader/start.sh
 ```
 或
