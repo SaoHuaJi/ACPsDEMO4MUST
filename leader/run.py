@@ -12,11 +12,34 @@
 """
 
 import sys
-
+import re
 from leader_agent import run_leader
+
+try:
+    import readline
+except ImportError:
+    pass
 
 
 EXIT_COMMANDS = {"exit", "quit", "退出"}
+
+
+def _clean_user_input(text: str) -> str:
+    """清洗用户终端输入，移除可能导致 LLM API 崩溃的控制字符和非法 Unicode 字符。"""
+    if not isinstance(text, str):
+        text = str(text)
+    
+    # 1. 物理消除 surrogate 字符 (终端异常或 httpx 可能产生)
+    # 使用 encode/decode 技巧比 re.sub 在 Python 3.12+ 中更可靠
+    try:
+        text = text.encode('utf-8', 'surrogateescape').decode('utf-8', 'replace')
+    except Exception:
+        text = text.encode('utf-8', 'replace').decode('utf-8')
+        
+    # 2. 移除不可见的 ASCII 控制字符 (保留空格、换行 \n、回车 \r、制表符 \t)
+    # 匹配 \x00-\x08, \x0b, \x0c, \x0e-\x1f, \x7f
+    text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', text)
+    return text
 
 
 def _print_answer(user_input: str) -> None:
@@ -28,8 +51,11 @@ def _print_answer(user_input: str) -> None:
     Returns:
         None: 该函数只产生终端输出，不返回业务结果。
     """
+    # 在传给 Leader 之前，先清洗掉终端混入的非法字符
+    clean_input = _clean_user_input(user_input)
+    
     # 调用 Leader ReAct 智能体处理当前轮用户输入。
-    answer = run_leader(user_input)
+    answer = run_leader(clean_input)
 
     # 将 Leader 的最终回答打印到终端。
     print("\nLeader>")
