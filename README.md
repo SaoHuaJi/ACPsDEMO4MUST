@@ -268,6 +268,8 @@ User>
 ./leader/start.sh
 ```
 
+Tips：因为目前www.ioa.pub还在建设中，对智能体工作状态的维护还在实现中，里面的智能体的 ACS 的 active 暂不代表真实智能体可用性。因此 Leader 使用 discover_partner 进行智能体发现时有可能找到实际不可用的智能体，与之交互会因对方不可达而报错。可以自行实现错误重试等临时解决方案。
+
 ## 演示链路
 
 ```text
