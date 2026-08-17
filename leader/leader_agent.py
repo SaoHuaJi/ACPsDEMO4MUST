@@ -62,7 +62,6 @@ def discover_partner(
     try:
         with httpx.Client(timeout=30.0) as client:
             response = client.post(discover_url, json=payload, headers=headers)
-            print(f"\n\npayload is {payload}\n\nresponse is {response.json()}\n\n")
             if response.status_code == 404:
                 response = client.post(f"{discover_url}/discover", json=payload, headers=headers)
             response.raise_for_status()
