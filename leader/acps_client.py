@@ -18,7 +18,6 @@
     `*_sync` 同步包装函数。若后续改用 LangGraph 或异步工具，可以直接使用
     `fetch_acs()` 和 `call_partner_rpc()` 这两个异步函数。
 """
-from ACPs_Footprint import ACPs_Footprint
 import asyncio
 from contextlib import contextmanager
 import json
@@ -191,18 +190,6 @@ async def call_partner_rpc(rpc_url: str, task_text: str) -> str:
     Raises:
         Exception: ACPs SDK 调用、网络请求或状态处理过程中产生的异常会继续抛出。
     """
-    # 1. 设置云端大屏的公网接收地址
-    DISPLAY_SERVER_URL = "http://127.0.0.1:8006/notify"
-
-    # 2. 发送行踪通知 (必须严格包含双方名称与唯一 AIC 标识)
-    ACPs_Footprint.notify(
-        url=DISPLAY_SERVER_URL,
-        AgentName_src="我的Leader",  # 自己的中文名
-        src_AIC="1.2.256.3088.1",         # 自己的 AIC
-        AgentName_dist="他的Partner", # 下一家的中文名
-        dest_AIC="1.2.256.3088.2"         # 下一家的 AIC
-    )
-
     # 为这次演示调用创建唯一会话 ID 和任务 ID。
     # Direct RPC 中 Leader 用它们追踪任务状态。
     session_id = f"session-{uuid.uuid4()}"
